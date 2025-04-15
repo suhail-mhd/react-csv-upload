@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import FileUpload from './components/FileUpload';
 
-function App() {
-  const [count, setCount] = useState(0)
+
+const App = () => {
+  const [loading, setLoading] = useState(false);
+  const [results, setResults] = useState(null);
+
+  const handleFileSubmit = async (file) => {
+    setLoading(true);
+    setResults(null);
+
+    setTimeout(() => {
+      const mockResponse = {
+        updated: 15,
+        notUpdated: 5,
+        errors: [
+          { line: 2, message: 'Invalid email format' },
+          { line: 8, message: 'Missing required field' },
+        ],
+      };
+      setResults(mockResponse);
+      setLoading(false);
+    }, 2000);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="min-h-screen bg-gray-50 p-4">
+      <h1 className="text-2xl font-bold text-center mb-4">CSV File Uploader</h1>
+      <div className="max-w-3xl mx-auto">
+        <FileUpload onSubmit={handleFileSubmit} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default App
+export default App;
