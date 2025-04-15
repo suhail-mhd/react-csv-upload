@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FileUpload from './components/FileUpload';
+import StatusIndicator from './components/StatusIndicator';
 
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
       <h1 className="text-2xl font-bold text-center mb-4">CSV File Uploader</h1>
       <div className="max-w-3xl mx-auto">
         <FileUpload onSubmit={handleFileSubmit} />
+        <StatusIndicator loading={loading} results={results} />
       </div>
     </div>
   );
